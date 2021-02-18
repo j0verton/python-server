@@ -93,8 +93,22 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Encode the new animal and send in response
         self.wfile.write(f"{new_animal}".encode())
 
-    # Here's a method on the class that overrides the parent's method.
-    # It handles any PUT request.
+    def do_DELETE(self):
+        # Set a 204 response code
+        self._set_headers(204)
+
+        # Parse the URL
+        (resource, id) = self.parse_url(self.path)
+
+        # Delete a single animal from the list
+        if resource == "animals":
+            delete_animal(id)
+
+        # Encode the new animal and send in response
+        self.wfile.write("".encode())
+
+        # Here's a method on the class that overrides the parent's method.
+        # It handles any PUT request.
 
     def do_PUT(self):
         self.do_POST()
