@@ -48,8 +48,8 @@ def create_employee(employee)
 
 def delete_employee(id)
     employee_index = -1
-    for index, animal in enumerate(ANIMALS):
-        if animal["id"] == id:
-            animal_index = index
-    if animal_index >= 0:
-        EMPLOYEES.pop(animal_index)
+    for index, employee in enumerate(EMPLOYEES):
+        if employee["id"] == id:
+            employee = index
+    if employee_index >= 0:
+        EMPLOYEES.pop(employee_index)
