@@ -1,3 +1,12 @@
 {
-    "python.pythonPath": "/home/overtonje/.local/share/virtualenvs/overtonje-En4J2r1B/bin/python"
+    "python.pythonPath": "/home/overtonje/.local/share/virtualenvs/overtonje-En4J2r1B/bin/python",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Python Kennels",
+            "database": "kennel.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
 }
