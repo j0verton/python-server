@@ -1,7 +1,9 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from locations.request import get_all_locations, get_single_location
-from animals import get_all_animals, get_single_animal, create_animal
+from employees import get_all_employees, get_single_employee, get_employees_by_location
+from customers import get_all_customers, get_single_customer, get_customers_by_email
+from locations import get_all_locations, get_single_location
+from animals import get_all_animals, get_single_animal, get_animals_by_location, get_animals_by_status, create_animal
 # Here's a class. It inherits from another class.
 # For now, think of a class as a container for functions that
 # work together for a common purpose. In this case, that
@@ -81,6 +83,16 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_single_customer(id)}"
                 else:
                     response = f"{get_all_customers()}"
+            elif resource == "employees":
+                if id is not None:
+                    response = f"{get_single_employee(id)}"
+                else:
+                    response = f"{get_all_employees()}"
+            elif resource == "locations":
+                if id is not None:
+                    response = f"{get_single_location(id)}"
+                else:
+                    response = f"{get_all_locations()}"
 
         # Response from parse_url() is a tuple with 3
         # items in it, which means the request was for
@@ -93,7 +105,12 @@ class HandleRequests(BaseHTTPRequestHandler):
             # email as a filtering value?
             if key == "email" and resource == "customers":
                 response = get_customers_by_email(value)
-
+            if key == "location_id" and resource == "employees":
+                response = get_employees_by_location(value)
+            if key == "location_id" and resource == "animals":
+                response = get_animals_by_location(value)
+            if key == "status" and resource == "animals":
+                response = get_animals_by_status(value)
         self.wfile.write(response.encode())
 
     def do_POST(self):
